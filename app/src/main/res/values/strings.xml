@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">YDRN</string>
+    <string name="current_heading">CURRENT\nHEADING</string>
+    <string name="target_heading">TARGET\nHEADING</string>
+    <string name="current">0</string>
+    <string name="target">10</string>
+    <string name="level">LEVEL: 1</string>
+    <string name="turn">TURN: 1</string>
+    <string name="cargo">CARGO LEFT: 10</string>
+    <string name="deck">CARDS LEFT: 10</string>
+    <string name="nextTurn">NEXT TURN</string>
+    <string name="concede">CONCEDE</string>
+</resources>
