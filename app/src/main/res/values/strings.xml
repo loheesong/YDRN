@@ -10,4 +10,6 @@
     <string name="deck">CARDS LEFT: 10</string>
     <string name="nextTurn">NEXT TURN</string>
     <string name="concede">CONCEDE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
