@@ -54,6 +54,7 @@ public class GameFragment extends Fragment {
         turnTextView = view.findViewById(R.id.turn);
         cardsLeftTextView = view.findViewById(R.id.cardsLeft);
         cargoLeftTextView = view.findViewById(R.id.cargoLeft);
+        targetTextView = view.findViewById(R.id.target);
         cardList = new ImageView[] {
                 view.findViewById(R.id.card1),
                 view.findViewById(R.id.card2),
@@ -77,10 +78,8 @@ public class GameFragment extends Fragment {
         updateFiveCardsUI();
 
         // bind text view data
-        levelTextView.setText(formatLevelText(player.getLevel()));
-        turnTextView.setText(formatTurnText(player.getTurn()));
-        cardsLeftTextView.setText(formatCardsLeft(player.getCardsLeft()));
-        cargoLeftTextView.setText(formatCargoLeft(player.getCargo()));
+        updateAllText();
+
 
         // click listener for five cards
         for (int i = 0; i < 5; i++) {
@@ -92,6 +91,9 @@ public class GameFragment extends Fragment {
                     Log.d(TAG, "onClick: "+ index);
                     player.playCard(index);
                     updateFiveCardsUI();
+                    if (player.isWin()) {
+                        nextTurnButton.setText(R.string.toShop);
+                    }
                 }
             });
         }
@@ -114,13 +116,30 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 player.nextTurnButton();
                 updateFiveCardsUI();
+                updateAllText();
                 Log.d(TAG, "nextTurn click "+ player.isWin());
+                // TODO: transition to shop fragment
+            }
+        });
+
+        // click listener for concede button
+        concedeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
     }
 
     ////////////////////////////// Util methods //////////////////////////////
+    private void updateAllText() {
+        levelTextView.setText(formatLevelText(player.getLevel()));
+        turnTextView.setText(formatTurnText(player.getTurn()));
+        cardsLeftTextView.setText(formatCardsLeft(player.getCardsLeft()));
+        cargoLeftTextView.setText(formatCargoLeft(player.getCargo()));
+        targetTextView.setText(String.valueOf(player.getTargetNumber()));
+    }
     private void updateFiveCardsUI() {
         for (int i = 0; i < 5; i++) {
             ImageView imageView = cardList[i];

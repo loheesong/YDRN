@@ -19,7 +19,7 @@ public class Player {
     private int targetNumber;
     private int turn;
     private int level;
-    private GameState gameState;
+    private MutableLiveData<GameState> gameState;
     private TurnState turnState;
 
     enum TurnState {
@@ -27,7 +27,7 @@ public class Player {
     }
 
     enum GameState {
-        GAME, SHOP, DEATH
+        START, GAME, SHOP, DEATH
     }
 
     private final String[] STARTER_DECK = {
@@ -46,13 +46,14 @@ public class Player {
         tempDeck = new ArrayList<>();
         hand = new ArrayList<>();
         currentNumber = new MutableLiveData<>();
+        gameState = new MutableLiveData<>();
 
         // starting level values
         cargo = 10;
         currentNumber.setValue(0);
         targetNumber = 10;
 
-        gameState = GameState.GAME;
+        gameState.setValue(GameState.START);
         turnState = TurnState.CONTINUE;
         turn = 1;
         level = 1;
@@ -132,6 +133,7 @@ public class Player {
     public void nextTurnButton() {
         endTurn();
         drawHand();
+        Log.d("AAAAA", turnState.toString());
     }
 
     /**
@@ -218,5 +220,17 @@ public class Player {
 
     public int getCardsLeft() {
         return tempDeck.size();
+    }
+
+    public MutableLiveData<GameState> getGameState() {
+        return gameState;
+    }
+
+    public int getTargetNumber() {
+        return targetNumber;
+    }
+
+    public void setTargetNumber(int targetNumber) {
+        this.targetNumber = targetNumber;
     }
 }
