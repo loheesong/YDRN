@@ -19,6 +19,72 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/card3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        />
+
+    <ImageView
+        android:id="@+id/card1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-10dp"
+        android:scaleType="centerInside"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@+id/card3"
+        app:layout_constraintEnd_toStartOf="@+id/card2"
+        app:layout_constraintTop_toTopOf="@+id/card3" />
+
+    <ImageView
+        android:id="@+id/card2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-10dp"
+        android:scaleType="centerInside"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@+id/card3"
+        app:layout_constraintEnd_toStartOf="@+id/card3"
+        app:layout_constraintTop_toTopOf="@+id/card3" />
+
+    <ImageView
+        android:id="@+id/card5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-10dp"
+        android:scaleType="centerInside"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@+id/card3"
+        app:layout_constraintStart_toEndOf="@+id/card4"
+        app:layout_constraintTop_toTopOf="@+id/card3" />
+
+    <ImageView
+        android:id="@+id/card4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-10dp"
+        android:scaleType="centerInside"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@+id/card3"
+        app:layout_constraintStart_toEndOf="@+id/card3"
+        app:layout_constraintTop_toTopOf="@+id/card3" />
+
     <TextView
         android:id="@+id/currentHeading"
         android:layout_width="wrap_content"
@@ -155,12 +221,5 @@
         app:layout_constraintStart_toStartOf="@+id/targetHeading"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cardRecycler"
-        android:layout_width="659dp"
-        android:layout_height="170dp"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

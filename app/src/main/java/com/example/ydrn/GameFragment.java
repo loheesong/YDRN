@@ -5,26 +5,27 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.lifecycle.Observer;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class GameFragment extends Fragment {
     // UI variables
-    private TextView current;
-    private TextView target;
-    private TextView level;
-    private TextView turn;
-    private TextView cardsLeft;
-    private TextView cargoLeft;
-    private RecyclerView cardRecycler;
-    private FiveCardAdapter cardAdapter;
+    private TextView currentTextView;
+    private TextView targetTextView;
+    private TextView levelTextView;
+    private TextView turnTextView;
+    private TextView cardsLeftTextView;
+    private TextView cargoLeftTextView;
+    private ImageView[] cardList;
+    private Button nextTurnButton;
+    private Button concedeButton;
 
     // game variables
     private Player player;
@@ -35,7 +36,7 @@ public class GameFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // get Player
+        // get Player singleton
         player = Player.getInstance();
     }
 
@@ -47,18 +48,19 @@ public class GameFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         // get reference to UI elements
-        current = view.findViewById(R.id.current);
-        target = view.findViewById(R.id.target);
-        level = view.findViewById(R.id.level);
-        turn = view.findViewById(R.id.turn);
-        cardsLeft = view.findViewById(R.id.cardsLeft);
-        cargoLeft = view.findViewById(R.id.cargoLeft);
-        cardRecycler = view.findViewById(R.id.cardRecycler);
-
-        // set up card recycler
-        cardRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        cardAdapter = new FiveCardAdapter(getActivity(), player.getHand());
-        cardRecycler.setAdapter(cardAdapter);
+        currentTextView = view.findViewById(R.id.current);
+        targetTextView = view.findViewById(R.id.target);
+        levelTextView = view.findViewById(R.id.level);
+        turnTextView = view.findViewById(R.id.turn);
+        cardsLeftTextView = view.findViewById(R.id.cardsLeft);
+        cargoLeftTextView = view.findViewById(R.id.cargoLeft);
+        cardList = new ImageView[] {
+                view.findViewById(R.id.card1),
+                view.findViewById(R.id.card2),
+                view.findViewById(R.id.card3),
+                view.findViewById(R.id.card4),
+                view.findViewById(R.id.card5)
+        };
 
         return view;
     }
@@ -69,6 +71,73 @@ public class GameFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.i(TAG, "onViewCreated");
 
-        // set up all listeners
+        // bind image to five card UI
+        updateFiveCardsUI();
+
+        // bind text view data
+        levelTextView.setText(formatLevelText(player.getLevel()));
+        turnTextView.setText(formatTurnText(player.getTurn()));
+        cardsLeftTextView.setText(formatCardsLeft(player.getCardsLeft()));
+        cargoLeftTextView.setText(formatCargoLeft(player.getCargo()));
+
+        // click listener for five cards
+        for (int i = 0; i < 5; i++) {
+            ImageView imageView = cardList[i];
+            int index = i;
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick: "+ index);
+                    player.playCard(index);
+                    updateFiveCardsUI();
+                }
+            });
+        }
+
+        // observer for current heading
+        player.getCurrentNumber().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (player.getCurrentNumber().getValue() != null) {
+                    currentTextView.setText(String.valueOf(player.getCurrentNumber().getValue()));
+                } else {
+                    Log.d(TAG, "CURRENT NUMBER IS NULL");
+                }
+            }
+        });
+
+        // click listener for next turn button
+
+
+    }
+
+    ////////////////////////////// Util methods //////////////////////////////
+    private void updateFiveCardsUI() {
+        for (int i = 0; i < 5; i++) {
+            ImageView imageView = cardList[i];
+            Card card = player.getHand().get(i);
+            if (card.is_useable()) {
+                imageView.setImageResource(card.getResource());
+            } else {
+                imageView.setImageResource(card.getBackResource());
+            }
+        }
+    }
+
+    private String formatLevelText(int playerLevel) {
+        final String format = "LEVEL: ";
+        return format + playerLevel;
+    }
+    private String formatTurnText(int playerTurn) {
+        final String format = "TURN: ";
+        return format + playerTurn;
+    }
+    private String formatCardsLeft(int playerCardLeft) {
+        final String format = "CARDS LEFT: ";
+        return format + playerCardLeft;
+    }
+    private String formatCargoLeft(int playerCargoLeft) {
+        final String format = "CARGO LEFT: ";
+        return format + playerCargoLeft;
     }
 }

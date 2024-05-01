@@ -2,6 +2,8 @@ package com.example.ydrn;
 
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +15,7 @@ public class Player {
     private final int HAND_SIZE = 5;
 
     private int cargo;
-    private int currentNumber;
+    private MutableLiveData<Integer> currentNumber;
     private int targetNumber;
     private int turn;
     private int level;
@@ -43,20 +45,21 @@ public class Player {
         mainDeck = new ArrayList<>();
         tempDeck = new ArrayList<>();
         hand = new ArrayList<>();
+        currentNumber = new MutableLiveData<>();
 
         // starting level values
         cargo = 10;
-        currentNumber = 0;
+        currentNumber.setValue(0);
         targetNumber = 10;
-
-        loadStarterDeck();
-        resetDeck();
-        drawHand();
 
         gameState = GameState.GAME;
         turnState = TurnState.CONTINUE;
         turn = 1;
         level = 1;
+
+        loadStarterDeck();
+        resetDeck();
+        drawHand();
 
         // shop variables
 
@@ -119,7 +122,7 @@ public class Player {
     public void playCard(int position) {
         Card card = hand.get(position);
         if (card.is_useable()) {
-            currentNumber = card.use(currentNumber);
+            currentNumber.setValue(card.use(currentNumber.getValue()));
         }
     }
 
@@ -165,11 +168,11 @@ public class Player {
     }
 
     public boolean isWin() {
-        return currentNumber == targetNumber;
+        return currentNumber.getValue() == targetNumber;
     }
 
     public boolean isDead() {
-        return hand.size() == 0;
+        return tempDeck.size() == 0;
     }
 
     /**
@@ -191,5 +194,29 @@ public class Player {
 
     public List<Card> getHand() {
         return hand;
+    }
+
+    public MutableLiveData<Integer> getCurrentNumber() {
+        return currentNumber;
+    }
+
+    public TurnState getTurnState() {
+        return turnState;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public int getCargo() {
+        return cargo;
+    }
+
+    public int getCardsLeft() {
+        return tempDeck.size();
     }
 }
