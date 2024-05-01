@@ -75,6 +75,11 @@ public class Card {
         return operator + value;
     }
 
+    /**
+     *
+     * @param currentValue current number
+     * @return number after this card is applied
+     */
     public int use(int currentValue) {
         setCardUnuseable();
         return function.apply(currentValue, this.value);

@@ -17,12 +17,15 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     // game variables
     private GameState gameState;
 
     // UI variables
     private Fragment gameFragment;
+    private Fragment startFragment;
     private FragmentManager fragmentManager;
 
     private final String TAG = "MainActivity";
@@ -36,28 +39,30 @@ public class MainActivity extends AppCompatActivity {
 
         // init fragments
         gameFragment = new GameFragment();
+        startFragment = new StartFragment();
 
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.frame_layout, gameFragment);
         fragmentTransaction.commit();
-
-        switch (gameState) {
-            case GAME:
-                showFragment(gameFragment);
-            default:
-
-        }
     }
 
     private void showFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (fragment.isAdded()) {
-            fragmentTransaction.show(fragment);
-        } else {
-            fragmentTransaction.add(R.id.frame_layout, fragment);
-            Log.d(TAG, "Theoretically, you should not see this message.");
+        // Hide all existing fragments
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment f : fragments) {
+            fragmentTransaction.hide(f);
         }
+
+        // Show or add the new fragment
+        Log.d(TAG, "showFragment: "+ fragment.isAdded());
+//        if (fragment.isAdded()) {
+//            fragmentTransaction.show(fragment);
+//        } else {
+//            fragmentTransaction.add(R.id.frame_layout, fragment);
+//            Log.d(TAG, "Theoretically, you should not see this message.");
+//        }
 
         // We are not using fragmentTransaction.replace in order to maintain fragment state
         fragmentTransaction.commit();
