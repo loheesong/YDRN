@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.frame_layout, startFragment); // start is first
 
         fragmentTransaction.commit();
+
+        player.getGameState().setValue(Player.GameState.SHOP);
     }
 
     private void showFragment(Fragment fragment) {
