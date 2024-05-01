@@ -61,6 +61,8 @@ public class GameFragment extends Fragment {
                 view.findViewById(R.id.card4),
                 view.findViewById(R.id.card5)
         };
+        nextTurnButton = view.findViewById((R.id.nextTurn));
+        concedeButton = view.findViewById(R.id.concede);
 
         return view;
     }
@@ -107,7 +109,14 @@ public class GameFragment extends Fragment {
         });
 
         // click listener for next turn button
-
+        nextTurnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.nextTurnButton();
+                updateFiveCardsUI();
+                Log.d(TAG, "nextTurn click "+ player.isWin());
+            }
+        });
 
     }
 

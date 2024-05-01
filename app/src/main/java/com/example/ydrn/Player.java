@@ -137,7 +137,7 @@ public class Player {
     /**
      * Call end of turn actions. if last turn, draw remaining
      */
-    public void endTurn() {
+    private void endTurn() {
         // put useable cards back into deck
         for (Card card: hand) {
             if (card.is_useable()) {
