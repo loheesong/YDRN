@@ -51,7 +51,6 @@ public class Card {
         costTiers.put("*", 2);
         costTiers.put("//", 2);
         costTiers.put("**", 3);
-        costTiers.put("%", 3);
     }
 
     private String operator;
@@ -65,7 +64,23 @@ public class Card {
         this.value = value;
         this.useable = true;
 
-        this.cost = value * costTiers.get(operator);
+        if (operator.equals("%")) {
+            switch (value) {
+                case 10:
+                    this.cost = 5;
+                    break;
+                case 50:
+                    this.cost = 8;
+                    break;
+                case 100:
+                    this.cost = 10;
+                    break;
+                default:
+                    this.cost = 100;
+            }
+        } else {
+            this.cost = value * costTiers.get(operator);
+        }
         this.function = operationsTable.get(operator);
     }
 
@@ -89,6 +104,15 @@ public class Card {
         return new Card(this.operator, this.value);
     }
 
+    public boolean is_useable() {
+        return this.useable;
+    }
+
+    private void setCardUnuseable() {
+        this.useable = false;
+    }
+
+    //////////////////////// GETTER AND SETTER ////////////////////////
     public Integer getResource() {
         Log.d("getResource", operator + value);
         return cardAssets.get(operator + value);
@@ -97,11 +121,8 @@ public class Card {
     public Integer getBackResource() {
         return cardAssets.get("back");
     }
-    private void setCardUnuseable() {
-        this.useable = false;
-    }
 
-    public boolean is_useable() {
-        return this.useable;
+    public int getCost() {
+        return cost;
     }
 }

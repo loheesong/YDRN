@@ -118,7 +118,9 @@ public class GameFragment extends Fragment {
                 updateFiveCardsUI();
                 updateAllText();
                 Log.d(TAG, "nextTurn click "+ player.isWin());
-                // TODO: transition to shop fragment
+                if (player.isWin()) {
+                    player.populateShop();
+                }
             }
         });
 
@@ -126,7 +128,7 @@ public class GameFragment extends Fragment {
         concedeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // TODO: concede button
             }
         });
 
