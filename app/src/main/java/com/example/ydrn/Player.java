@@ -47,7 +47,7 @@ public class Player {
     //// Shop variables ////
     private List<Card> shopChoices;
     private final int shopSize = 5;
-    private final int gachaOdds = 99;
+    private final int gachaOdds = 100;
     private final int baseRewardCargo = 10;
     private final Card[] ALL_CARDS = {
             new Card("+",1), new Card("+",2), new Card("+",3),
@@ -74,22 +74,30 @@ public class Player {
         currentNumber = new MutableLiveData<>();
         gameState = new MutableLiveData<>();
 
+        gameState.setValue(GameState.START);
+
+        // starting level values
+        setStartingValues();
+
+        // shop variables
+        shopChoices = new ArrayList<>();
+    }
+
+    private void setStartingValues() {
         // starting level values
         cargo = 10;
         currentNumber.setValue(0);
         targetNumber = 10;
 
-        gameState.setValue(GameState.START);
         turnState = TurnState.CONTINUE;
         turn = 1;
         level = 1;
 
+        mainDeck.clear();
+        tempDeck.clear();
         loadStarterDeck();
         resetDeck();
         drawHand();
-
-        // shop variables
-        shopChoices = new ArrayList<>();
     }
 
     public static Player getInstance() {
@@ -301,6 +309,11 @@ public class Player {
         // takes into account current level and current target heading
         // for now do this
         targetNumber += 10;
+    }
+
+    //////////////// DEATH METHODS ////////////////
+    public void tryAgainButton() {
+        setStartingValues();
     }
 
     //////////////// GETTERS AND SETTERS ////////////////

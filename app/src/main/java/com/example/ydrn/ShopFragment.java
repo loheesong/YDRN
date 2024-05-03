@@ -165,6 +165,6 @@ public class ShopFragment extends Fragment {
 
     private String generateGreetings() {
         Random random = new Random();
-        return randomGreetings[random.nextInt(randomGreetings.length-1)] + "-" + random.nextInt(100);
+        return randomGreetings[random.nextInt(randomGreetings.length)] + "-" + random.nextInt(100);
     }
 }

@@ -63,7 +63,7 @@ public class GameFragment extends Fragment {
                 view.findViewById(R.id.card5)
         };
         nextTurnButton = view.findViewById((R.id.nextTurn));
-        concedeButton = view.findViewById(R.id.concede);
+        concedeButton = view.findViewById(R.id.tryAgain);
 
         return view;
     }
@@ -117,6 +117,8 @@ public class GameFragment extends Fragment {
                 updateFiveCardsUI();
                 updateAllText();
                 Log.d(TAG, "nextTurn click "+ player.isWin());
+                Log.d(TAG, "nextTurn click "+ player.getTurnState());
+                Log.d(TAG, "nextTurn click "+ player.getGameState().getValue());
             }
         });
 
@@ -152,6 +154,9 @@ public class GameFragment extends Fragment {
     private void updateFiveCardsUI() {
         for (int i = 0; i < 5; i++) {
             ImageView imageView = cardList[i];
+            if (i >= player.getHand().size()) {
+                return;
+            }
             Card card = player.getHand().get(i);
             if (card.is_useable()) {
                 imageView.setImageResource(card.getResource());

@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // remove after testing
-//        player.getGameState().setValue(Player.GameState.START);
+        player.getGameState().setValue(Player.GameState.START);
     }
 
     private void showFragment(Fragment fragment) {
