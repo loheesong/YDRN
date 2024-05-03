@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
+
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        // Remember that you should never show the action bar if the
+        // status bar is hidden, so hide that too if necessary.
+//        ActionBar actionBar = getActionBar();
+//        actionBar.hide();
+        // cause null pointer idk why
 
         // init game variables
         player = Player.getInstance();

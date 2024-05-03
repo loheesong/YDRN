@@ -163,34 +163,34 @@
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toStartOf="@+id/cargoLeft" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nextTurn"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="134dp"
         android:layout_height="39dp"
         android:layout_marginTop="16dp"
-
         android:layout_marginEnd="16dp"
-        android:background="@color/white"
+        android:background="@drawable/transparent_button"
         android:fontFamily="@font/lores"
         android:text="@string/nextTurn"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tryAgain"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="131dp"
         android:layout_height="38dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@color/white"
+        android:background="@drawable/transparent_button"
         android:fontFamily="@font/lores"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
         android:text="@string/concede"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

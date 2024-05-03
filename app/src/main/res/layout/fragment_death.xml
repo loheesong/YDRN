@@ -7,19 +7,19 @@
     android:background="@color/black"
     tools:context=".DeathFragment">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tryAgain"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="38dp"
         android:layout_marginTop="20dp"
-        android:background="@color/white"
+        android:background="@drawable/transparent_button"
         android:fontFamily="@font/lores"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
         android:text="@string/try_again"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deathMessage" />

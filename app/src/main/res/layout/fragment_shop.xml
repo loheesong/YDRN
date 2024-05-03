@@ -11,19 +11,19 @@
         android:layout_height="wrap_content"
         android:background="@color/black">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextLevel"
-            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="150dp"
             android:layout_height="38dp"
             android:layout_marginTop="10dp"
-            android:background="@color/white"
+            android:background="@drawable/transparent_button"
             android:fontFamily="@font/lores"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"
             android:insetBottom="0dp"
             android:text="@string/nextLevel"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/deckInfo" />
@@ -32,7 +32,7 @@
             android:id="@+id/view"
             android:layout_width="659dp"
             android:layout_height="185dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/transparent_rectangle"
             android:foregroundGravity="center_vertical"
             android:visibility="visible"
