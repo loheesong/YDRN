@@ -15,6 +15,4 @@
     <string name="cost">COST: 0</string>
     <string name="nextLevel">NEXT LEVEL</string>
     <string name="credits">A GAME BY DANIEL, EE SONG, JEAN, KAELEN, SAIF, SIEW HEAN\nAPP BY EE SONG</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

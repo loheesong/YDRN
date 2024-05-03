@@ -47,6 +47,7 @@ public class Player {
     //// Shop variables ////
     private List<Card> shopChoices;
     private final int shopSize = 5;
+    private final int gachaOdds = 99;
     private final int baseRewardCargo = 10;
     private final Card[] ALL_CARDS = {
             new Card("+",1), new Card("+",2), new Card("+",3),
@@ -213,10 +214,6 @@ public class Player {
     }
 
     //////////////// SHOP METHODS ////////////////
-    public String generateGreetings() {
-        return "DESTINATION: NIKE-100";
-    }
-
     // generate shop choices
     public void populateShop() {
         if (cargo == 0) {
@@ -293,10 +290,7 @@ public class Player {
         resetDeck();
         drawHand();
 
-        int gacha = 0;
-        if (new Random().nextInt(99) == 0) {
-            gacha = 50;
-        }
+        int gacha = new Random().nextInt(gachaOdds) == 0 ? 50 : 0;
         updateCargo(baseRewardCargo + gacha);
 
         gameState.setValue(GameState.GAME); // will trigger change fragment
@@ -308,6 +302,7 @@ public class Player {
         // for now do this
         targetNumber += 10;
     }
+
     //////////////// GETTERS AND SETTERS ////////////////
 
     public List<Card> getTempDeck() {
@@ -360,9 +355,5 @@ public class Player {
 
     public List<Card> getMainDeck() {
         return mainDeck;
-    }
-
-    public void setCargo(int cargo) {
-        this.cargo = cargo;
     }
 }

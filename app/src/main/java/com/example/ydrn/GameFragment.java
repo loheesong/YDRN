@@ -124,7 +124,7 @@ public class GameFragment extends Fragment {
         concedeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: concede button
+                player.getGameState().setValue(Player.GameState.DEATH);
             }
         });
 
@@ -135,6 +135,7 @@ public class GameFragment extends Fragment {
                 if (gameState == Player.GameState.GAME) {
                     updateAllText();
                     updateFiveCardsUI();
+                    nextTurnButton.setText(R.string.nextTurn);
                 }
             }
         });

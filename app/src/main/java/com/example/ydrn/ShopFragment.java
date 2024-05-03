@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class ShopFragment extends Fragment {
     private ImageView[] cardList;
@@ -27,6 +28,13 @@ public class ShopFragment extends Fragment {
     private TextView cargoLeftTextView;
     private Button nextLevelButton;
     private Player player;
+
+    // Util variables
+    private final String[] randomGreetings = new String[] {
+            "SUGON",
+            "RAMA",
+            "RIGUMA"
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,7 +119,7 @@ public class ShopFragment extends Fragment {
     }
 
     private void updateAllText() {
-        greetingTextView.setText(player.generateGreetings());
+        greetingTextView.setText(generateGreetings());
         cargoLeftTextView.setText(formatCargoLeft(player.getCargo()));
         deckInfoTextView.setText(formatDeckInfo(player.getMainDeck()));
     }
@@ -155,4 +163,8 @@ public class ShopFragment extends Fragment {
         return "COST: " + card.getCost();
     }
 
+    private String generateGreetings() {
+        Random random = new Random();
+        return randomGreetings[random.nextInt(randomGreetings.length-1)] + "-" + random.nextInt(100);
+    }
 }
