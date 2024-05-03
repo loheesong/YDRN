@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,16 @@ public class DeathFragment extends Fragment {
             public void onClick(View v) {
                 player.tryAgainButton();
                 player.getGameState().setValue(Player.GameState.GAME);
+            }
+        });
+
+        player.getGameState().observe(getViewLifecycleOwner(), new Observer<Player.GameState>() {
+            @Override
+            public void onChanged(Player.GameState gameState) {
+                if (gameState == Player.GameState.DEATH) {
+                    deathLevelTextView.setText(formatDeathLevel(player.getLevel()));
+                    deathMessageTextView.setText(getRandomDeathMessage());
+                }
             }
         });
     }

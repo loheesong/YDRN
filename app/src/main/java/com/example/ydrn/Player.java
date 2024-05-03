@@ -22,6 +22,7 @@ public class Player {
     private int targetNumber;
     private int turn;
     private int level;
+    private final int difficulty = 8;
     private MutableLiveData<GameState> gameState;
     private TurnState turnState;
 
@@ -307,8 +308,12 @@ public class Player {
 
     private void updateTargetHeading() {
         // takes into account current level and current target heading
-        // for now do this
-        targetNumber += 10;
+        Random random = new Random();
+        int baseModifier = level * difficulty;
+        int randomModifier = random.nextInt(Math.floorDiv(baseModifier,2));
+        boolean is_increase = random.nextInt(2) == 0;
+        int changeToTarget = baseModifier + randomModifier;
+        targetNumber += is_increase ? changeToTarget : -changeToTarget;
     }
 
     //////////////// DEATH METHODS ////////////////

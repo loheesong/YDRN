@@ -54,11 +54,13 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.hide(gameFragment);
         fragmentTransaction.add(R.id.frame_layout, shopFragment);
         fragmentTransaction.hide(shopFragment);
+        fragmentTransaction.add(R.id.frame_layout, deathFragment);
+        fragmentTransaction.hide(deathFragment);
         fragmentTransaction.add(R.id.frame_layout, startFragment); // start is first
 
         fragmentTransaction.commit();
 
-        // GameState observer
+        // GameState observer: this changes the fragments
         player.getGameState().observe(this, new Observer<Player.GameState>() {
             @Override
             public void onChanged(Player.GameState gameState) {
@@ -83,9 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        // remove after testing
-        player.getGameState().setValue(Player.GameState.START);
     }
 
     private void showFragment(Fragment fragment) {
