@@ -47,6 +47,7 @@ public class Player {
     //// Shop variables ////
     private List<Card> shopChoices;
     private final int shopSize = 5;
+    private final int baseRewardCargo = 10;
     private final Card[] ALL_CARDS = {
             new Card("+",1), new Card("+",2), new Card("+",3),
             new Card("+",4), new Card("+",5), new Card("+",6),
@@ -114,7 +115,7 @@ public class Player {
         }
     }
 
-    public void resetDeck() {
+    private void resetDeck() {
         loadTempDeck();
         Collections.shuffle(tempDeck);
         hand.clear();
@@ -123,7 +124,7 @@ public class Player {
         turnState = TurnState.CONTINUE;
     }
 
-    public void drawHand() {
+    private void drawHand() {
         for (int i = 0; i < HAND_SIZE; i++) {
             drawCard();
         }
@@ -157,6 +158,11 @@ public class Player {
     public void nextTurnButton() {
         endTurn();
         drawHand();
+        if (turnState == TurnState.WIN) {
+            gameState.setValue(GameState.SHOP);
+        } else if (turnState == TurnState.DEAD) {
+            gameState.setValue((GameState.DEATH));
+        }
     }
 
     /**
@@ -177,9 +183,7 @@ public class Player {
         }
     }
 
-    /**
-     * checks game state at the end of the turn. uses 'win', 'last', 'dead', 'continue'
-     */
+    //checks game state at the end of the turn. uses 'win', 'last', 'dead', 'continue'
     private void updateTurnState() {
         if (isWin()) {
             turnState = TurnState.WIN;
@@ -200,10 +204,7 @@ public class Player {
         return tempDeck.size() == 0;
     }
 
-    /**
-     * Updates cargo, used at the end of turn. Lowest cargo is 0
-     * @param number number of cargo to update
-     */
+    //Updates cargo, used at the end of turn. Lowest cargo is 0
     private void updateCargo(int number) {
         cargo += number;
         if (cargo < 0) {
@@ -219,16 +220,22 @@ public class Player {
     // generate shop choices
     public void populateShop() {
         if (cargo == 0) {
-            return; // shopChoices will have length = 0
+            for (int i = 0; i < 5; i++) {
+                Card card = new Card("+", 0); // dummy card
+                card.setCardUnuseable();
+                shopChoices.add(card);
+            }
+            return;
         }
 
-        List<Card> possibleChoices = new ArrayList<>();
         // find possible card choices cost < cargo
+        List<Card> possibleChoices = new ArrayList<>();
         for (Card card : ALL_CARDS) {
             if (card.getCost() <= cargo) {
                 possibleChoices.add(card);
             }
         }
+
         // make lower cost cards more likely to be drawn
         List<Integer> drawOdds = new ArrayList<>();
         for (Card card : possibleChoices) {
@@ -260,6 +267,46 @@ public class Player {
         // This should never be reached if weights are properly provided
         Log.d(TAG, "Weights list is empty or invalid.");
         return 0;
+    }
+
+    // called when player buys card in shop, prevents buying unusable or too expensive cards
+    public String buyCard(int cardIndex) {
+        Card cardChoice = shopChoices.get(cardIndex);
+        if (!cardChoice.is_useable()) {
+            return "Cant buy this card!";
+        }
+        if (cardChoice.getCost() > cargo) {
+            return "Too expensive!";
+        }
+        // card can be bought
+        mainDeck.add(cardChoice.createCopy());
+        cardChoice.setCardUnuseable();
+        updateCargo(-1*cardChoice.getCost());
+        return "";
+    }
+
+    // called when next level pressed
+    public void nextLevelButton() {
+        shopChoices.clear(); // remove all shop choices
+        updateTargetHeading();
+        level += 1;
+        resetDeck();
+        drawHand();
+
+        int gacha = 0;
+        if (new Random().nextInt(99) == 0) {
+            gacha = 50;
+        }
+        updateCargo(baseRewardCargo + gacha);
+
+        gameState.setValue(GameState.GAME); // will trigger change fragment
+        Log.d(TAG, "nextLevelButton: " + level);
+    }
+
+    private void updateTargetHeading() {
+        // takes into account current level and current target heading
+        // for now do this
+        targetNumber += 10;
     }
     //////////////// GETTERS AND SETTERS ////////////////
 
@@ -313,5 +360,9 @@ public class Player {
 
     public List<Card> getMainDeck() {
         return mainDeck;
+    }
+
+    public void setCargo(int cargo) {
+        this.cargo = cargo;
     }
 }

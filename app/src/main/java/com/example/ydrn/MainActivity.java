@@ -47,6 +47,17 @@ public class MainActivity extends AppCompatActivity {
         deathFragment = new DeathFragment();
         fragmentManager = getSupportFragmentManager();
 
+        // 'start' all fragment
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.frame_layout, gameFragment);
+        fragmentTransaction.hide(gameFragment);
+        fragmentTransaction.add(R.id.frame_layout, shopFragment);
+        fragmentTransaction.hide(shopFragment);
+        fragmentTransaction.add(R.id.frame_layout, startFragment); // start is first
+
+        fragmentTransaction.commit();
+
         // GameState observer
         player.getGameState().observe(this, new Observer<Player.GameState>() {
             @Override
@@ -70,22 +81,11 @@ public class MainActivity extends AppCompatActivity {
                         showFragment(startFragment);
                         break;
                 }
-
             }
         });
 
-        // 'start' all fragment
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.add(R.id.frame_layout, gameFragment);
-        fragmentTransaction.hide(gameFragment);
-        fragmentTransaction.add(R.id.frame_layout, shopFragment);
-        fragmentTransaction.hide(shopFragment);
-        fragmentTransaction.add(R.id.frame_layout, startFragment); // start is first
-
-        fragmentTransaction.commit();
-
-        player.getGameState().setValue(Player.GameState.SHOP);
+        // remove after testing
+//        player.getGameState().setValue(Player.GameState.START);
     }
 
     private void showFragment(Fragment fragment) {

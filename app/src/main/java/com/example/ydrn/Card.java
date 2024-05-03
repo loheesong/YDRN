@@ -108,7 +108,7 @@ public class Card {
         return this.useable;
     }
 
-    private void setCardUnuseable() {
+    public void setCardUnuseable() {
         this.useable = false;
     }
 

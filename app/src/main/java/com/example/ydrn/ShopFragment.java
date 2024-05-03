@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,14 +71,21 @@ public class ShopFragment extends Fragment {
 
         // bind all text to text view
         player.populateShop();
-        updateAllTextAndImage();
+        updateAllText();
+        updateShopChoicesUI();
 
         // click listeners for buying cards
         for (int i = 0; i < 5; i++) {
+            int index = i;
             cardList[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO
+                    String errorMessage = player.buyCard(index);
+                    if (!errorMessage.equals("")) {
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                    } 
+                    updateShopChoicesUI();
+                    updateAllText();
                 }
             });
         }
@@ -86,30 +94,37 @@ public class ShopFragment extends Fragment {
         nextLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                player.nextLevelButton();
+            }
+        });
+
+        player.getGameState().observe(getViewLifecycleOwner(), new Observer<Player.GameState>() {
+            @Override
+            public void onChanged(Player.GameState gameState) {
+                if (gameState == Player.GameState.SHOP) {
+                    player.populateShop();
+                    updateAllText();
+                    updateShopChoicesUI();
+                }
             }
         });
     }
 
-    private void updateAllTextAndImage() {
+    private void updateAllText() {
         greetingTextView.setText(player.generateGreetings());
         cargoLeftTextView.setText(formatCargoLeft(player.getCargo()));
+        deckInfoTextView.setText(formatDeckInfo(player.getMainDeck()));
+    }
+
+    private void updateShopChoicesUI() {
         List<Card> shopChoices = player.getShopChoices();
         for (int i = 0; i < 5; i++) {
-            int imageResource;
-            String costString;
-            if (shopChoices.size() == 0) {
-                imageResource = R.drawable.back;
-                costString = "COST: INF";
-            } else {
-                Card card = shopChoices.get(i);
-                imageResource = card.getResource();
-                costString = formatCardCost(card);
-            }
+            Card card = shopChoices.get(i);
+            int imageResource = !card.is_useable() ? R.drawable.back : card.getResource();
+            String costString = !card.is_useable() ? "COST: INF" : formatCardCost(card);
             cardCostList[i].setText(costString);
             cardList[i].setImageResource(imageResource);
         }
-        deckInfoTextView.setText(formatDeckInfo(player.getMainDeck()));
     }
 
     ////////////////////////////////// Util functions //////////////////////////////////
@@ -133,7 +148,7 @@ public class ShopFragment extends Fragment {
             if (i == Math.floorDiv(cardsTally.size(), 2)) out += "\n";
             i++;
         }
-        return out;
+        return "YOUR DECK CONTAINS:\n" + out;
     }
 
     private String formatCardCost(Card card) {

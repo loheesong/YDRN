@@ -80,7 +80,6 @@ public class GameFragment extends Fragment {
         // bind text view data
         updateAllText();
 
-
         // click listener for five cards
         for (int i = 0; i < 5; i++) {
             ImageView imageView = cardList[i];
@@ -118,9 +117,6 @@ public class GameFragment extends Fragment {
                 updateFiveCardsUI();
                 updateAllText();
                 Log.d(TAG, "nextTurn click "+ player.isWin());
-                if (player.isWin()) {
-                    player.populateShop();
-                }
             }
         });
 
@@ -132,6 +128,16 @@ public class GameFragment extends Fragment {
             }
         });
 
+        // prepare ui when changed to this fragment
+        player.getGameState().observe(getViewLifecycleOwner(), new Observer<Player.GameState>() {
+            @Override
+            public void onChanged(Player.GameState gameState) {
+                if (gameState == Player.GameState.GAME) {
+                    updateAllText();
+                    updateFiveCardsUI();
+                }
+            }
+        });
     }
 
     ////////////////////////////// Util methods //////////////////////////////

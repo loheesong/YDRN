@@ -1,212 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShopFragment"
-    android:background="@color/black">
+    tools:context=".ShopFragment">
 
-
-    <Button
-        android:id="@+id/nextLevel"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="150dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/white"
-        android:fontFamily="@font/lores"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        android:text="@string/nextLevel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deckInfo" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="659dp"
-        android:layout_height="185dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/transparent_rectangle"
-        android:foregroundGravity="center_vertical"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/card3"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-5dp"
-        android:scaleType="centerInside"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:src="@drawable/back"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.0" />
+        android:background="@color/black">
 
-    <ImageView
-        android:id="@+id/card2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="-10dp"
-        android:scaleType="centerInside"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:src="@drawable/back"
-        app:layout_constraintBottom_toBottomOf="@+id/card3"
-        app:layout_constraintEnd_toStartOf="@+id/card3"
-        app:layout_constraintTop_toTopOf="@+id/card3"
-        app:layout_constraintVertical_bias="0.0" />
+        <Button
+            android:id="@+id/nextLevel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="150dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:fontFamily="@font/lores"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/nextLevel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deckInfo" />
 
-    <ImageView
-        android:id="@+id/card1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="-10dp"
-        android:scaleType="centerInside"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:src="@drawable/back"
-        app:layout_constraintBottom_toBottomOf="@+id/card2"
-        app:layout_constraintEnd_toStartOf="@+id/card2"
-        app:layout_constraintTop_toTopOf="@+id/card2" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="659dp"
+            android:layout_height="185dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/transparent_rectangle"
+            android:foregroundGravity="center_vertical"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/card4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-10dp"
-        android:scaleType="centerInside"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:src="@drawable/back"
-        app:layout_constraintBottom_toBottomOf="@+id/card3"
-        app:layout_constraintStart_toEndOf="@+id/card3"
-        app:layout_constraintTop_toTopOf="@+id/card3"
-        app:layout_constraintVertical_bias="0.0" />
+        <ImageView
+            android:id="@+id/card3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:scaleType="centerInside"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintHorizontal_bias="0.499"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/view"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/card5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-10dp"
-        android:scaleType="centerInside"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:src="@drawable/back"
-        app:layout_constraintBottom_toBottomOf="@+id/card4"
-        app:layout_constraintStart_toEndOf="@+id/card4"
-        app:layout_constraintTop_toTopOf="@+id/card4"
-        app:layout_constraintVertical_bias="0.0" />
+        <ImageView
+            android:id="@+id/card2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-10dp"
+            android:scaleType="centerInside"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/card3"
+            app:layout_constraintEnd_toStartOf="@+id/card3"
+            app:layout_constraintTop_toTopOf="@+id/card3"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/greetings"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="@font/lores"
-        android:text="TextView"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view" />
+        <ImageView
+            android:id="@+id/card1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-10dp"
+            android:scaleType="centerInside"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/card2"
+            app:layout_constraintEnd_toStartOf="@+id/card2"
+            app:layout_constraintTop_toTopOf="@+id/card2" />
 
-    <TextView
-        android:id="@+id/cardCost1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-15dp"
-        android:fontFamily="@font/lores"
-        android:gravity="center"
-        android:text="@string/cost"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/card1"
-        app:layout_constraintStart_toStartOf="@+id/card1"
-        app:layout_constraintTop_toBottomOf="@+id/card1" />
+        <ImageView
+            android:id="@+id/card4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:scaleType="centerInside"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/card3"
+            app:layout_constraintStart_toEndOf="@+id/card3"
+            app:layout_constraintTop_toTopOf="@+id/card3"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/cardCost2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-15dp"
-        android:fontFamily="@font/lores"
-        android:gravity="center"
-        android:text="@string/cost"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/card2"
-        app:layout_constraintStart_toStartOf="@+id/card2"
-        app:layout_constraintTop_toBottomOf="@+id/card2" />
+        <ImageView
+            android:id="@+id/card5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:scaleType="centerInside"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/card4"
+            app:layout_constraintStart_toEndOf="@+id/card4"
+            app:layout_constraintTop_toTopOf="@+id/card4"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/cardCost3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-15dp"
-        android:fontFamily="@font/lores"
-        android:gravity="center"
-        android:text="@string/cost"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/card3"
-        app:layout_constraintStart_toStartOf="@+id/card3"
-        app:layout_constraintTop_toBottomOf="@+id/card3" />
+        <TextView
+            android:id="@+id/greetings"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/lores"
+            android:text="TextView"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintStart_toStartOf="@+id/view" />
 
-    <TextView
-        android:id="@+id/cardCost4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-15dp"
-        android:fontFamily="@font/lores"
-        android:gravity="center"
-        android:text="@string/cost"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/card4"
-        app:layout_constraintStart_toStartOf="@+id/card4"
-        app:layout_constraintTop_toBottomOf="@+id/card4" />
+        <TextView
+            android:id="@+id/cardCost1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-15dp"
+            android:fontFamily="@font/lores"
+            android:gravity="center"
+            android:text="@string/cost"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/card1"
+            app:layout_constraintStart_toStartOf="@+id/card1"
+            app:layout_constraintTop_toBottomOf="@+id/card1" />
 
-    <TextView
-        android:id="@+id/cardCost5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-15dp"
-        android:fontFamily="@font/lores"
-        android:gravity="center"
-        android:text="@string/cost"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/card5"
-        app:layout_constraintStart_toStartOf="@+id/card5"
-        app:layout_constraintTop_toBottomOf="@+id/card5" />
+        <TextView
+            android:id="@+id/cardCost2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-15dp"
+            android:fontFamily="@font/lores"
+            android:gravity="center"
+            android:text="@string/cost"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/card2"
+            app:layout_constraintStart_toStartOf="@+id/card2"
+            app:layout_constraintTop_toBottomOf="@+id/card2" />
 
-    <TextView
-        android:id="@+id/cargoLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="@font/lores"
-        android:gravity="center|start"
-        android:text="@string/cargo"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view" />
+        <TextView
+            android:id="@+id/cardCost3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-15dp"
+            android:fontFamily="@font/lores"
+            android:gravity="center"
+            android:text="@string/cost"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/card3"
+            app:layout_constraintStart_toStartOf="@+id/card3"
+            app:layout_constraintTop_toBottomOf="@+id/card3" />
 
-    <TextView
-        android:id="@+id/deckInfo"
-        android:layout_width="655dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/lores"
-        android:gravity="center"
-        android:text="@string/credits"
-        android:textColor="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        <TextView
+            android:id="@+id/cardCost4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-15dp"
+            android:fontFamily="@font/lores"
+            android:gravity="center"
+            android:text="@string/cost"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/card4"
+            app:layout_constraintStart_toStartOf="@+id/card4"
+            app:layout_constraintTop_toBottomOf="@+id/card4" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/cardCost5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-15dp"
+            android:fontFamily="@font/lores"
+            android:gravity="center"
+            android:text="@string/cost"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/card5"
+            app:layout_constraintStart_toStartOf="@+id/card5"
+            app:layout_constraintTop_toBottomOf="@+id/card5" />
+
+        <TextView
+            android:id="@+id/cargoLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/lores"
+            android:gravity="center|start"
+            android:text="@string/cargo"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/deckInfo"
+            android:layout_width="655dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/lores"
+            android:gravity="center"
+            android:text="@string/credits"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
