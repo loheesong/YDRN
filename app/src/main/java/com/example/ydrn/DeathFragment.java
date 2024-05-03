@@ -21,12 +21,6 @@ public class DeathFragment extends Fragment {
     private TextView deathMessageTextView;
     private Button tryAgainButton;
 
-    private final String[] deathMessages = new String[] {
-            "This is extremely not stonks.",
-            "My cabbages!!!",
-            "Should we get out and push?\nOh right, we're in space..."
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +76,6 @@ public class DeathFragment extends Fragment {
     }
 
     private String getRandomDeathMessage() {
-        return deathMessages[new Random().nextInt(deathMessages.length)];
+        return EasterEggs.deathMessages[new Random().nextInt(EasterEggs.deathMessages.length)];
     }
 }

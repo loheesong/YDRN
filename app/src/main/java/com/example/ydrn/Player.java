@@ -15,14 +15,12 @@ public class Player {
     private List<Card> mainDeck;
     private List<Card> tempDeck;
     private List<Card> hand;
-    private final int HAND_SIZE = 5;
 
     private int cargo;
     private MutableLiveData<Integer> currentNumber;
     private int targetNumber;
     private int turn;
     private int level;
-    private final int difficulty = 8;
     private MutableLiveData<GameState> gameState;
     private TurnState turnState;
 
@@ -34,34 +32,10 @@ public class Player {
         START, GAME, SHOP, DEATH
     }
 
-    private final Pair[] STARTER_DECK = {
-            new Pair<>("+", 1), new Pair<>("+",1), new Pair<>("+",1),
-            new Pair<>("+",2), new Pair<>("+",2),
-            new Pair<>("+",3), new Pair<>("+",3),
-            new Pair<>("-",1), new Pair<>("-",1), new Pair<>("-",1),
-            new Pair<>("-",2), new Pair<>("-",2),
-            new Pair<>("-",3), new Pair<>("-",3),
-            new Pair<>("*",2), new Pair<>("*",2), new Pair<>("*",3),
-            new Pair<>("//",2), new Pair<>("//",2), new Pair<>("//",3),
-    };
-
     //// Shop variables ////
     private List<Card> shopChoices;
     private final int shopSize = 5;
-    private final int gachaOdds = 100;
-    private final int baseRewardCargo = 10;
-    private final Card[] ALL_CARDS = {
-            new Card("+",1), new Card("+",2), new Card("+",3),
-            new Card("+",4), new Card("+",5), new Card("+",6),
-            new Card("+",7), new Card("+",8), new Card("+",9),
-            new Card("-",1), new Card("-",2), new Card("-",3),
-            new Card("-",4), new Card("-",5), new Card("-",6),
-            new Card("-",7), new Card("-",8), new Card("-",9),
-            new Card("*",2), new Card("*",3), new Card("*",4), new Card("*",5),
-            new Card("//",2), new Card("//",3), new Card("//",4), new Card("//",5),
-            new Card("**",2), new Card("**",3),
-            new Card("%",10), new Card("%",50), new Card("%",100)
-    };
+
 
     // Util variables
     private final String TAG = "Player";
@@ -109,7 +83,7 @@ public class Player {
     }
 
     private void loadStarterDeck() {
-        for (Pair card : STARTER_DECK) {
+        for (Pair card : PlayerConstants.STARTER_DECK) {
             String operator = (String) card.first;
             int value = (int) card.second;
             Card new_card = new Card(operator, value);
@@ -135,7 +109,7 @@ public class Player {
     }
 
     private void drawHand() {
-        for (int i = 0; i < HAND_SIZE; i++) {
+        for (int i = 0; i < PlayerConstants.HAND_SIZE; i++) {
             drawCard();
         }
     }
@@ -236,7 +210,7 @@ public class Player {
 
         // find possible card choices cost < cargo
         List<Card> possibleChoices = new ArrayList<>();
-        for (Card card : ALL_CARDS) {
+        for (Card card : PlayerConstants.ALL_CARDS) {
             if (card.getCost() <= cargo) {
                 possibleChoices.add(card);
             }
@@ -299,8 +273,8 @@ public class Player {
         resetDeck();
         drawHand();
 
-        int gacha = new Random().nextInt(gachaOdds) == 0 ? 50 : 0;
-        updateCargo(baseRewardCargo + gacha);
+        int gacha = new Random().nextInt(PlayerConstants.shopGachaOdds) == 0 ? 50 : 0;
+        updateCargo(PlayerConstants.baseRewardCargo + gacha);
 
         gameState.setValue(GameState.GAME); // will trigger change fragment
         Log.d(TAG, "nextLevelButton: " + level);
@@ -309,7 +283,7 @@ public class Player {
     private void updateTargetHeading() {
         // takes into account current level and current target heading
         Random random = new Random();
-        int baseModifier = level * difficulty;
+        int baseModifier = level * PlayerConstants.difficulty;
         int randomModifier = random.nextInt(Math.floorDiv(baseModifier,2));
         boolean is_increase = random.nextInt(2) == 0;
         int changeToTarget = baseModifier + randomModifier;

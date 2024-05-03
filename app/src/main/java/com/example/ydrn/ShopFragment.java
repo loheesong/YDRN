@@ -28,14 +28,6 @@ public class ShopFragment extends Fragment {
     private TextView cargoLeftTextView;
     private Button nextLevelButton;
     private Player player;
-
-    // Util variables
-    private final String[] randomGreetings = new String[] {
-            "SUGON",
-            "RAMA",
-            "RIGUMA"
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,6 +157,6 @@ public class ShopFragment extends Fragment {
 
     private String generateGreetings() {
         Random random = new Random();
-        return randomGreetings[random.nextInt(randomGreetings.length)] + "-" + random.nextInt(100);
+        return EasterEggs.randomGreetings[random.nextInt(EasterEggs.randomGreetings.length)] + "-" + random.nextInt(100);
     }
 }
