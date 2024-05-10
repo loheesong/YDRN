@@ -3,7 +3,7 @@
 ## Project Description 
 Your favourite card game is back but in an App! Now you can carry the game around with you on your smartphone (Android only, sorry iOS) and play it wherever you are. The same features, same great art, now portable! 
 
-See the original game here!
+See the original game [here](https://github.com/loheesong/Your_Days_Are_Numbered)!
 
 ## Patch notes 
 
@@ -48,6 +48,6 @@ Developed with:
 ## Acknowledgement
 The original game in Python and Tkinter was made by Daniel Lim, Jean Soh, Kaelen Tay, Mohammad Saif, Toh Siew Hean. 
 
-Card art: Daniel Lim 
+Card art: [Daniel Lim](https://github.com/xdaniel-lim)
 
 The Android app was done by me. 
