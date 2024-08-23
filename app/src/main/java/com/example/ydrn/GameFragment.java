@@ -92,6 +92,8 @@ public class GameFragment extends Fragment {
                     updateFiveCardsUI();
                     if (player.isWin()) {
                         nextTurnButton.setText(R.string.toShop);
+                    } else {
+                        nextTurnButton.setText(R.string.nextTurn);
                     }
                 }
             });

@@ -34,10 +34,12 @@ Buy phase (in between levels):
 - Use remaining cargo to buy different cards
 
 ## Installation
-To play the game, make sure your Android phone is on developer mode. Download this repo and compile with Android Studio. Plug in your phone to download the app from the IDE. 
+To play the game, make sure your Android phone is on developer mode. Clone this repo and open the project with Android Studio. Click run app button on top of screen. 
+
+Alternatively, plug in your phone to download the app from the IDE. 
 
 ## Technologies Used 
-The app was done entirely in Java. Tested using Pixel 5A AVD within Android Studio. 
+The app was done entirely in Java. Tested using Pixel 5A AVD within Android Studio (Hedgehog). 
 
 Developed with: 
 -   JDK:  `jbr-17`
